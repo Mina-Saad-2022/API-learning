@@ -1,5 +1,17 @@
 //* Receiving data from the api
-let data; //س تعريف متغير data خارج الدالة get
+//* ||------------------------------------------------------------------------||
+//                        اولا تحزين المتغير خارج الدالة
+//* ||------------------------------------------------------------------------||
+
+let data;
+
+// ||------------------------------------------------------------------------||
+//                       اولا تحزين المتغير خارج الدالة
+// ||------------------------------------------------------------------------//
+
+//* ||------------------------------------------------------------------------||
+//                      API ثانيا عمل الدالة وفيها هستدعي رابط ال
+//* ||------------------------------------------------------------------------||
 const get = async () => {
   const response = await fetch("https://dummyjson.com/products/");
   data = await response.json(); // حفظ البيانات في المتغير data
@@ -9,25 +21,31 @@ const get = async () => {
   document.querySelector("#des").innerHTML = data.products[0].description;
   document.querySelector("#img").src = data.products[0].images[0];
   document.querySelector("#choose").innerHTML = `
-                <select class="form-select" id="brandSelect" onchange="updateProductDetails(this.value)">
-                    ${data.products
-                      .map((product) => {
-                        return `<option value="${product.id}">${product.brand}</option>`;
-                      })
-                      .join("")}
-                </select>
-            `;
+                  <select class="form-select" id="brandSelect" onchange="updateProductDetails(this.value)">
+                      ${data.products
+                        .map((product) => {
+                          return `<option value="${product.id}">${product.brand}</option>`;
+                        })
+                        .join("")}
+                  </select>
+              `;
 };
+// ||------------------------------------------------------------------------||
+//                     API ثانيا عمل الدالة وفيها هستدعي رابط ال
+// ||------------------------------------------------------------------------//
+
 // دالة لتحديث الـ title والوصف بناءً على الاختيار
 const updateProductDetails = (selectedId) => {
   // إيجاد المنتج بناءً على ID المحدد
   const selectedProduct = data.products.find(
     (product) => product.id == selectedId
-  );
+  );s
   if (selectedProduct) {
     document.querySelector("#title").innerHTML = selectedProduct.brand; // تحديث #title
     document.querySelector("#des").innerHTML = selectedProduct.description; // تحديث #des
     document.querySelector("#img").src = selectedProduct.images[0];
   }
 };
-get(); // استدعاء الدالة لجلب البيانات
+
+// استدعاء الدالة لجلب البيانات
+get();
